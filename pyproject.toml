@@ -9,7 +9,7 @@ description = "A small governance layer for LLM-assisted project context."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "Your Name" }]
+authors = [{ name = "Project Maintainer" }]
 dependencies = []
 
 [project.optional-dependencies]

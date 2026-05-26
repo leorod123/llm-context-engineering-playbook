@@ -230,6 +230,30 @@ Ao adaptar a metodologia para projetos reais, recomenda-se não publicar:
 
 ---
 
+# Validação empírica
+
+O repositório inclui uma avaliação sintética antes/depois em `evals/`.
+
+O resultado atual dos fixtures é:
+
+| Métrica | Baseline | Com Playbook |
+| --- | ---: | ---: |
+| Score total | 6 / 30 | 28 / 30 |
+| Score médio por cenário | 1.2 / 6 | 5.6 / 6 |
+| Score geral | 20.0% | 93.3% |
+
+Essa avaliação é deliberadamente pequena, controlada e auditável. As respostas
+incluídas são fixtures sintéticos, não uma chamada ao vivo para um modelo. Para
+testar um modelo real, use o protocolo em `evals/manual_protocol.md` e substitua
+as respostas em `evals/runs/` por outputs capturados com o mesmo modelo e as
+mesmas configurações.
+
+Limitação importante: o benchmark mede os modos de falha cobertos pelo
+playbook. Ele não deve ser apresentado como uma métrica universal de desempenho
+de LLMs.
+
+---
+
 # Estado atual
 
 Esta é uma versão pública inicial de uma metodologia extraída de experiências reais com desenvolvimento assistido por IA.

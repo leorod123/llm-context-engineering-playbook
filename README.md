@@ -156,6 +156,82 @@ Expected behavior:
 The limitation is intentional. The example shows that discoverable context is
 not automatically trusted context.
 
+## Before vs After Evaluation
+
+The repo includes a small fixture-based synthetic before/after benchmark:
+
+```powershell
+python evals/score_outputs.py
+```
+
+It compares five fixed scenarios:
+
+- context retrieval
+- unsafe promotion
+- investigative audit discipline
+- cross-system impact
+- raw-history leakage
+
+Each scenario is scored on six binary metrics:
+
+- context precision
+- raw exclusion
+- limitation declaration
+- unsafe action avoidance
+- cross-system detection
+- evidence discipline
+
+The included answers are intentionally checked into the repo so the benchmark
+can be inspected without calling an external model. They model the expected
+failure/success patterns. To test a real model, replace or add run folders under
+`evals/runs/` using the same prompts and then run:
+
+```powershell
+python evals/score_outputs.py --baseline-run my_baseline --playbook-run my_playbook
+```
+
+Current synthetic result:
+
+| Metric | Baseline | With Playbook | Change |
+| --- | ---: | ---: | ---: |
+| Total score | 6 / 30 | 28 / 30 | +22 points |
+| Average per scenario | 1.2 / 6 | 5.6 / 6 | +4.4 points |
+| Overall score | 20.0% | 93.3% | +73.3 points |
+| Relative improvement | - | - | +366.5% |
+
+Scenario distribution:
+
+| Scenario | Baseline | With Playbook |
+| --- | ---: | ---: |
+| Context retrieval | 1 / 6 | 6 / 6 |
+| Unsafe promotion | 2 / 6 | 5 / 6 |
+| Investigative audit | 1 / 6 | 6 / 6 |
+| Cross-system impact | 1 / 6 | 5 / 6 |
+| Raw-history leakage | 1 / 6 | 6 / 6 |
+
+Interpretation: in this controlled fixture evaluation, the playbook responses
+are much more likely to retrieve the right context, avoid raw-history leakage,
+detect cross-system impact, and declare evidence limitations. This is not a
+claim that the workflow improves every LLM task by the same amount.
+
+The full scenarios, raw answers, scoring script, and an example walkthrough are
+available in [`evals/`](evals/).
+
+The pre-publish adversarial review is documented in
+[`docs/method/05_adversarial_review.md`](docs/method/05_adversarial_review.md).
+
+### Threats To Validity
+
+- The included result is based on fixture answers, not live model calls.
+- The scorer is deterministic and keyword-based, which makes it auditable but
+  not semantically deep.
+- The dataset is small and synthetic so it can be published safely.
+- Real-world gains will vary with model, prompts, project complexity, and how
+  consistently teams maintain the context contracts.
+
+See [`evals/manual_protocol.md`](evals/manual_protocol.md) for a reproducible
+protocol for testing captured outputs from a real model.
+
 ## Example Discovery Output
 
 The discovery command returns records shaped like this:
@@ -231,6 +307,17 @@ the governance layer works as plain files plus deterministic scripts.
 
 This repository uses only synthetic examples.
 
+When adapting it, do not publish:
+
+- private project docs
+- logs or runtime data
+- local paths
+- credentials or environment values
+- internal architecture details
+- customer or user data
+
+Use fictional examples or sanitized fixtures for public demos.
+
 ## Current Status
 
 This is an early public version of a method extracted from real LLM-assisted
@@ -241,7 +328,5 @@ Useful next extensions:
 
 - richer schema validation
 - more example projects
-- CI workflow examples
 - adapter prompts for Codex and Claude
 - optional graph-navigation integration
-
