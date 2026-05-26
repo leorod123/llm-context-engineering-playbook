@@ -256,7 +256,7 @@ de LLMs.
 
 # Estado atual
 
-Esta é uma versão pública inicial de uma metodologia extraída de experiências reais com desenvolvimento assistido por IA.
+Esta é uma versão pública funcional da metodologia, com CLI executável, exemplo sintético, avaliação determinística, testes e CI via GitHub Actions.
 
 O objetivo não é apresentar uma solução definitiva.
 

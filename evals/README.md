@@ -2,6 +2,25 @@
 
 This directory contains a small before/after benchmark for the playbook.
 
+## Result Snapshot
+
+| Metric | Baseline | With Playbook | Change |
+| --- | ---: | ---: | ---: |
+| Total score | 6 / 30 | 28 / 30 | +22 points |
+| Average per scenario | 1.2 / 6 | 5.6 / 6 | +4.4 points |
+| Overall score | 20.0% | 93.3% | +73.3 points |
+| Relative improvement | - | - | +366.5% |
+
+Scenario distribution:
+
+| Scenario | Baseline | With Playbook |
+| --- | ---: | ---: |
+| Context retrieval | 1 / 6 | 6 / 6 |
+| Unsafe promotion | 2 / 6 | 5 / 6 |
+| Investigative audit | 1 / 6 | 6 / 6 |
+| Cross-system impact | 1 / 6 | 5 / 6 |
+| Raw-history leakage | 1 / 6 | 6 / 6 |
+
 It is intentionally simple:
 
 - same synthetic project
@@ -55,7 +74,7 @@ The `raw_excluded` metric means "raw notes were not used as current authority."
 An answer can pass that metric either by not relying on raw notes or by
 explicitly excluding them.
 
-## Current Result
+## Metric Breakdown
 
 ```text
 baseline: 6 / 30  (20.0%)

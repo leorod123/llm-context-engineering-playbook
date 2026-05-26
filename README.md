@@ -2,6 +2,11 @@
 
 A practical governance layer for LLM-assisted software work.
 
+[![Python](https://img.shields.io/badge/python-%3E%3D3.10-blue)](pyproject.toml)
+[![Tests](https://img.shields.io/badge/pytest-passing-brightgreen)](tests/)
+[![CI](https://img.shields.io/badge/CI-GitHub%20Actions-blue)](.github/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 This project turns scattered project memory into small, explainable,
 maturity-aware context for coding agents. It is designed for teams using tools
 like Codex, Claude, Copilot-style agents, or internal LLM workflows on real
@@ -10,6 +15,22 @@ codebases where "just read the docs" is not enough.
 The goal is not to make agents read more. The goal is to make them read the
 right context, understand its authority, and stop when the evidence is not good
 enough.
+
+## Workflow At A Glance
+
+```mermaid
+flowchart LR
+    A["Project docs with frontmatter"] --> B["Build registry"]
+    B --> C["Validate maturity gates"]
+    C --> D["Discover focused context"]
+    D --> E["Agent receives ranked docs + limitations"]
+
+    R["Raw notes / historical material"] -. "excluded from default authority" .-> B
+    C -. "blocks unsafe promotion" .-> E
+```
+
+The workflow is intentionally boring in the best way: plain files, explicit
+metadata, deterministic checks, and context returned with its warning label.
 
 ## Why I Built This
 
@@ -320,9 +341,10 @@ Use fictional examples or sanitized fixtures for public demos.
 
 ## Current Status
 
-This is an early public version of a method extracted from real LLM-assisted
-engineering work. The example is deliberately small so the rules are easy to
-read, run, and challenge.
+This is a public working version of the method with a runnable CLI, synthetic
+example project, deterministic evaluation harness, tests, and GitHub Actions CI.
+The example is deliberately small so the rules are easy to read, run, and
+challenge.
 
 Useful next extensions:
 
