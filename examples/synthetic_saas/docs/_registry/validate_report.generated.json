@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "status": "approved",
+  "documents": 4,
+  "issues": [
+    {
+      "level": "diagnostic",
+      "path": "docs",
+      "code": "no_allowed_context",
+      "message": "All indexed context is restricted or forbidden; agents must declare limitations."
+    }
+  ]
+}

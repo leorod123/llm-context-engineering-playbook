@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-05-26T20:23:26Z",
+  "source_hash": "a19f7b5275d05bae18af5cff0ab0e2c1ca11b4f043726002151cd6563a71178c",
+  "docs_scanned": 4,
+  "documents": [
+    {
+      "id": "refund_pipeline_overview",
+      "title": "Refund Pipeline Overview",
+      "path": "docs/projects/billing/refund_pipeline/00_overview.md",
+      "project_id": "refund_pipeline",
+      "doc_type": "project",
+      "status": "active",
+      "authority": "project_memory",
+      "systems": [
+        "billing"
+      ],
+      "validation_state": "implementation_validated",
+      "semantic_status": "partially_validated",
+      "bot_usage": "restricted",
+      "evidence_status": "partial",
+      "cross_system_impact": "confirmed",
+      "declared": {
+        "components": [
+          "refund_worker",
+          "payment_gateway"
+        ],
+        "tags": [
+          "refunds"
+        ],
+        "related_contracts": [],
+        "upstream_systems": [],
+        "downstream_systems": [
+          "notifications",
+          "scheduler"
+        ],
+        "downstream_projects": [],
+        "required_contracts": [
+          "refund_cross_system_contract"
+        ],
+        "known_boundaries": [
+          "contracts/refund_cross_system_contract.md"
+        ]
+      },
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "refund_pipeline_plan",
+      "title": "Refund Pipeline Plan",
+      "path": "docs/projects/billing/refund_pipeline/01_plan.md",
+      "project_id": "refund_pipeline",
+      "doc_type": "project",
+      "status": "active",
+      "authority": "operational_contract",
+      "systems": [
+        "billing"
+      ],
+      "validation_state": "structurally_validated",
+      "semantic_status": "partially_validated",
+      "bot_usage": "restricted",
+      "evidence_status": "partial",
+      "cross_system_impact": "none",
+      "declared": {
+        "components": [
+          "refund_worker"
+        ],
+        "tags": [
+          "refunds"
+        ],
+        "related_contracts": [],
+        "upstream_systems": [],
+        "downstream_systems": [],
+        "downstream_projects": [],
+        "required_contracts": [],
+        "known_boundaries": []
+      },
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "refund_pipeline_validation",
+      "title": "Refund Pipeline Validation",
+      "path": "docs/projects/billing/refund_pipeline/04_validation.md",
+      "project_id": "refund_pipeline",
+      "doc_type": "validation",
+      "status": "active",
+      "authority": "validation_evidence",
+      "systems": [
+        "billing",
+        "notifications"
+      ],
+      "validation_state": "implementation_validated",
+      "semantic_status": "partially_validated",
+      "bot_usage": "restricted",
+      "evidence_status": "partial",
+      "cross_system_impact": "confirmed",
+      "declared": {
+        "components": [
+          "refund_worker",
+          "customer_email"
+        ],
+        "tags": [
+          "refunds",
+          "evidence"
+        ],
+        "related_contracts": [],
+        "upstream_systems": [],
+        "downstream_systems": [
+          "notifications"
+        ],
+        "downstream_projects": [],
+        "required_contracts": [
+          "refund_cross_system_contract"
+        ],
+        "known_boundaries": [
+          "contracts/refund_cross_system_contract.md"
+        ]
+      },
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "refund_cross_system_contract",
+      "title": "Refund Cross-System Contract",
+      "path": "docs/projects/billing/refund_pipeline/contracts/refund_cross_system_contract.md",
+      "project_id": "refund_pipeline",
+      "doc_type": "contract",
+      "status": "active",
+      "authority": "operational_contract",
+      "systems": [
+        "billing",
+        "notifications",
+        "scheduler"
+      ],
+      "validation_state": "structurally_validated",
+      "semantic_status": "partially_validated",
+      "bot_usage": "restricted",
+      "evidence_status": "partial",
+      "cross_system_impact": "confirmed",
+      "declared": {
+        "components": [
+          "refund_worker",
+          "customer_email",
+          "retry_job"
+        ],
+        "tags": [
+          "refunds",
+          "cross-system"
+        ],
+        "related_contracts": [],
+        "upstream_systems": [],
+        "downstream_systems": [
+          "notifications",
+          "scheduler"
+        ],
+        "downstream_projects": [],
+        "required_contracts": [],
+        "known_boundaries": [
+          "refund worker must not send customer emails directly",
+          "retry scheduling must remain idempotent"
+        ]
+      },
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  ],
+  "system_index": {
+    "billing": [
+      "refund_pipeline_overview",
+      "refund_pipeline_plan",
+      "refund_pipeline_validation",
+      "refund_cross_system_contract"
+    ],
+    "notifications": [
+      "refund_pipeline_validation",
+      "refund_cross_system_contract"
+    ],
+    "scheduler": [
+      "refund_cross_system_contract"
+    ]
+  },
+  "project_index": {
+    "refund_pipeline": [
+      "refund_pipeline_overview",
+      "refund_pipeline_plan",
+      "refund_pipeline_validation",
+      "refund_cross_system_contract"
+    ]
+  },
+  "issues": []
+}
